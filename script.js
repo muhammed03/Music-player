@@ -12,6 +12,7 @@ const cover = document.getElementById("cover");
 
 // Audio titles
 const audios = [
+  "If you ask me",
   `Al-Mu'allim`,
   "Allahu Allah",
   "Forgotten Promises",
@@ -49,6 +50,33 @@ function pauseSong() {
 
   audio.pause();
 }
+
+// Prev song
+function prevSong() {
+  audioIndex--;
+
+  if (audioIndex < 0) {
+    audioIndex = audios.length - 1;
+  }
+
+  loadAudio(audios[audioIndex]);
+
+  playSong();
+}
+
+// Next song
+function nextSong() {
+  audioIndex++;
+
+  if (audioIndex === audios.length) {
+    audioIndex = 0;
+  }
+
+  loadAudio(audios[audioIndex]);
+
+  playSong();
+}
+
 // Event listeners
 playBtn.addEventListener("click", () => {
   const isPlaying = audioContainer.classList.contains("play");
@@ -59,3 +87,7 @@ playBtn.addEventListener("click", () => {
     playSong();
   }
 });
+
+// Change song
+prevBtn.addEventListener("click", prevSong);
+nextBtn.addEventListener("click", nextSong);
