@@ -126,6 +126,11 @@ body {
   transform: translateY(-90%);
 }
 
+.audio-details {
+  display: flex;
+  justify-content: space-between;
+}
+
 .progress-container {
   background: #535353;
   border-radius: 5px;

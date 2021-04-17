@@ -8,15 +8,16 @@ const audio = document.getElementById("audio");
 const progress = document.getElementById("progress");
 const progressContainer = document.getElementById("progress-container");
 const title = document.getElementById("title");
+const author = document.getElementById("author");
 const cover = document.getElementById("cover");
 
 // Audio titles
 const audios = [
-  "If you ask me",
-  `Al-Mu'allim`,
-  "Allahu Allah",
-  "Forgotten Promises",
-  "Give Thanks",
+  { songName: "If you ask me", author: "Yusuf Islam" },
+  { songName: `Al-Mu'allim`, author: "Sami Yusuf" },
+  { songName: "Allahu Allah", author: "Sami Yusuf" },
+  { songName: "Forgotten Promises", author: "Yusuf Islam" },
+  { songName: "Give Thanks", author: "Michael Jackson" },
 ];
 
 // Keep track of audio
@@ -27,10 +28,10 @@ loadAudio(audios[audioIndex]);
 
 // Update audio details
 function loadAudio(audiosItem) {
-  title.innerText = audiosItem;
-  audio.src = `src/music/${audiosItem}.mp3`;
-  cover.src = `src/images/${audiosItem}.jpg`;
-  console.log(audiosItem);
+  title.innerText = audiosItem.songName;
+  author.innerText = audiosItem.author;
+  audio.src = `src/music/${audiosItem.songName}.mp3`;
+  cover.src = `src/images/${audiosItem.songName}.jpg`;
 }
 
 //Play song
@@ -77,6 +78,21 @@ function nextSong() {
   playSong();
 }
 
+// Update progress bar
+function updateProgress(e) {
+  const { duration, currentTime } = e.srcElement;
+  const progressPercent = (currentTime / duration) * 100;
+  progress.style.width = `${progressPercent}%`;
+}
+
+function setProgress(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const duration = audio.duration;
+
+  audio.currentTime = (clickX / width) * duration;
+}
+
 // Event listeners
 playBtn.addEventListener("click", () => {
   const isPlaying = audioContainer.classList.contains("play");
@@ -91,3 +107,9 @@ playBtn.addEventListener("click", () => {
 // Change song
 prevBtn.addEventListener("click", prevSong);
 nextBtn.addEventListener("click", nextSong);
+
+//Time/song update
+audio.addEventListener("timeupdate", updateProgress);
+progressContainer.addEventListener("click", setProgress);
+
+audio.addEventListener("ended", nextSong);
