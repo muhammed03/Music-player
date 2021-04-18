@@ -70,14 +70,12 @@ document.addEventListener(
       target.parentNode.parentNode.id === "playlist"
     ) {
       if (target.parentNode.id === "playlist") {
-        console.log(target.id);
         audioIndex = target.id - 1;
 
         loadAudio(audios[audioIndex]);
 
         playSong();
       } else {
-        console.log(target.parentNode.id);
         audioIndex = target.parentNode.id - 1;
 
         loadAudio(audios[audioIndex]);
