@@ -3,6 +3,9 @@ const audioContainer = document.getElementById("audio-container");
 const playBtn = document.getElementById("play");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
+const modeBtn = document.getElementById("mode");
+
+const modeIcon = document.getElementById("mode-icon");
 
 const audio = document.getElementById("audio");
 const progress = document.getElementById("progress");
@@ -20,8 +23,15 @@ const audios = [
   { songName: "Give Thanks", author: "Michael Jackson" },
 ];
 
+// Modes
+const modes = ["default", "repeat", "random"];
+
 // Keep track of audio
 let audioIndex = 0;
+
+// Keep mode of audio play
+let modeIndex = 0;
+let modeStatus = modes[modeIndex];
 
 // Initially load audiu details into DOM
 loadAudio(audios[audioIndex]);
@@ -78,6 +88,64 @@ function nextSong() {
   playSong();
 }
 
+// Repeat song
+function repeatSong() {
+  loadAudio(audios[audioIndex]);
+
+  playSong();
+}
+
+// Random song
+function randomSong() {
+  let currentAudioIndex = audioIndex;
+
+  function generateRandom(min, max) {
+    let num = Math.floor(Math.random() * (max - min + 1)) + min;
+    return [currentAudioIndex].includes(num) ? generateRandom(min, max) : num;
+  }
+
+  audioIndex = generateRandom(0, 4);
+
+  loadAudio(audios[audioIndex]);
+
+  playSong();
+}
+
+// Check mode play
+function checkMode() {
+  if (modeIndex == 0) {
+    if (!modeIcon.classList.contains("fa-redo")) {
+      modeIcon.classList.add("fa-redo");
+    }
+
+    modeIcon.style.color = "#47be3c";
+    modeIndex++;
+  } else if (modeIndex == 1) {
+    modeIcon.classList.remove("fa-redo");
+    modeIcon.classList.add("fa-random");
+    modeIndex++;
+  } else if (modeIndex == 2) {
+    modeIcon.classList.remove("fa-random");
+    modeIcon.classList.add("fa-redo");
+    modeIcon.style.color = "#dfdbdf";
+    modeIndex = 0;
+  }
+}
+
+// Next song play mode
+let playMode = nextSong;
+
+function nextSongPlayMode() {
+  if (modeIndex == 0) {
+    playMode = nextSong();
+  } else if (modeIndex == 1) {
+    playMode = repeatSong();
+  } else if (modeIndex == 2) {
+    playMode = randomSong();
+  }
+
+  return playMode;
+}
 // Update progress bar
 function updateProgress(e) {
   const { duration, currentTime } = e.srcElement;
@@ -107,9 +175,10 @@ playBtn.addEventListener("click", () => {
 // Change song
 prevBtn.addEventListener("click", prevSong);
 nextBtn.addEventListener("click", nextSong);
+modeBtn.addEventListener("click", checkMode);
 
 //Time/song update
 audio.addEventListener("timeupdate", updateProgress);
 progressContainer.addEventListener("click", setProgress);
 
-audio.addEventListener("ended", nextSong);
+audio.addEventListener("ended", nextSongPlayMode);
