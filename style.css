@@ -25,10 +25,71 @@ body {
   margin: 0;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.playlist-container {
+  position: relative;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 15px;
+  /* box-shadow: 0px 0px 17px 13px rgba(130, 207, 255, 1); */
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  overflow-y: auto;
+  margin-bottom: 50px;
+}
+
+.playlist-container div {
+  border-bottom: 1px solid grey;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.playlist-container div:last-child {
+  border-bottom: 0;
+}
+
+.playlist-container div span {
+  font-weight: bold;
+}
+
+.playlist-container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.playlist-container::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.playlist-container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #fff;
+  background-image: -webkit-gradient(
+    linear,
+    40% 0%,
+    75% 84%,
+    from(#4d9c41),
+    to(#19911d),
+    color-stop(0.6, #54de5d)
+  );
+}
+
 .audio-container {
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 18px 18px 23px 0px rgba(130, 207, 255, 1);
+  /* box-shadow: 0px 0px 17px 13px rgba(130, 207, 255, 1); */
   display: flex;
   padding: 20px 30px;
   position: relative;
@@ -51,7 +112,7 @@ body {
   left: 50%;
   width: 20px;
   height: 20px;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 130%);
 }
 
 .img-container img {
@@ -107,18 +168,24 @@ body {
   outline: 0;
 }
 
+.right-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
 .audio-info {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px 15px 0 0;
   position: absolute;
   top: 0;
-  left: 20px;
-  width: calc(100% - 40px);
+  left: 5%;
+  width: 90%;
   padding: 1px 10px 10px 150px;
   opacity: 0;
   transform: translateY(0%);
   transition: transform 0.3s ease-in, opacity 0.3s ease-in;
   z-index: 0;
+  /* box-shadow: 0px -10px 10px 8px rgba(130, 207, 255, 1); */
 }
 
 .audio-container.play .audio-info {
@@ -148,6 +215,10 @@ body {
   transition: width 0.1s linear;
 }
 
+.progress-duration {
+  display: flex;
+  justify-content: space-between;
+}
 @media (max-width: 430px) {
   .audio-container {
     padding: 20px 0px;

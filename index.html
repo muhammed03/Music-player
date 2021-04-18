@@ -19,38 +19,53 @@
     <title>Player</title>
   </head>
   <body>
-    <h1>Audio Player</h1>
-
-    <div class="audio-container" id="audio-container">
-      <div class="audio-info">
-        <div class="audio-details">
-          <h4 id="title"></h4>
-          <h4 id="author"></h4>
+    <!-- <h1>Audio Player</h1> -->
+    <div class="container">
+      <div class="playlist-container" id="playlist"></div>
+      <div class="audio-container" id="audio-container">
+        <div class="audio-info">
+          <div class="audio-details">
+            <h4 id="title"></h4>
+            <h4 id="author"></h4>
+          </div>
+          <div class="progress-duration">
+            <span id="current-time">0:00</span>
+            <span id="duration-time">0:00</span>
+          </div>
+          <div class="progress-container" id="progress-container">
+            <div class="progress" id="progress"></div>
+          </div>
         </div>
-        <div class="progress-container" id="progress-container">
-          <div class="progress" id="progress"></div>
+
+        <audio src="" id="audio"></audio>
+
+        <div class="img-container">
+          <img
+            alt="audio-cover"
+            id="cover"
+            src="./src/images/Al-Mu'allim.jpg"
+          />
+        </div>
+        <div class="navigation">
+          <button id="prev" class="action-btn">
+            <i class="fas fa-backward"></i>
+          </button>
+          <button id="play" class="action-btn action-btn-big">
+            <i class="fas fa-play"></i>
+          </button>
+          <button id="next" class="action-btn">
+            <i class="fas fa-forward"></i>
+          </button>
+        </div>
+        <div class="right-buttons">
+          <button id="mode" class="action-btn">
+            <i class="fas fa-redo" id="mode-icon"></i>
+          </button>
+          <button id="volume" class="action-btn">
+            <i class="fas fa-volume-up" id="volume-icon"></i>
+          </button>
         </div>
       </div>
-
-      <audio src="" id="audio"></audio>
-
-      <div class="img-container">
-        <img alt="audio-cover" id="cover" src="./src/images/Al-Mu'allim.jpg" />
-      </div>
-      <div class="navigation">
-        <button id="prev" class="action-btn">
-          <i class="fas fa-backward"></i>
-        </button>
-        <button id="play" class="action-btn action-btn-big">
-          <i class="fas fa-play"></i>
-        </button>
-        <button id="next" class="action-btn">
-          <i class="fas fa-forward"></i>
-        </button>
-      </div>
-      <button id="mode" class="action-btn">
-        <i class="fas fa-redo" id="mode-icon"></i>
-      </button>
     </div>
     <script src="script.js"></script>
   </body>
