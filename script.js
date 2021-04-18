@@ -245,10 +245,7 @@ function updateProgress(e) {
 
   timestamp.innerHTML = `${mins}:${secs}`;
 
-  setTimeout(
-    (durationTime.innerHTML = `${durationMins}:${durationSecs}`),
-    10000
-  );
+  durationTime.innerHTML = `${durationMins}:${durationSecs}`;
 }
 
 function setProgress(e) {
