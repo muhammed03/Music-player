@@ -43,6 +43,7 @@ body {
   text-align: center;
   overflow-y: auto;
   margin-bottom: 50px;
+  margin-top: 100px;
 }
 
 .playlist-container div {
@@ -213,6 +214,10 @@ body {
   height: 100%;
   width: 0%;
   transition: width 0.1s linear;
+}
+
+.author {
+  margin-left: 40px;
 }
 
 .progress-duration {
