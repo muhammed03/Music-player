@@ -238,7 +238,7 @@ function updateProgress(e) {
     durationMins = "0" + String(durationMins);
   }
 
-  let durationSecs = Math.floor(duration / 60);
+  let durationSecs = Math.floor(duration) - durationMins * 60;
   if (durationSecs < 10) {
     durationSecs = "0" + String(durationSecs);
   }
